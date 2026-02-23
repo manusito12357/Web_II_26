@@ -1,0 +1,89 @@
+body {
+    background-color: #54736e;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+nav {
+    background-color: #194756;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+.nombre {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+.menu li a {
+    color: white;
+    text-decoration: none;
+}
+.menu li a:hover {
+    border-bottom: 2px solid #F2EABC;
+}
+.tarjeta {
+    background-color: #F2EABC;
+    width: 800px;
+    padding: 35px 50px;
+    border-radius: 12px;
+    border: 3px solid #080000;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    column-gap: 120px;
+    align-items: start;
+}
+.info {
+    text-align: left;
+}
+p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+h3 {
+    color: #ff3b58;
+    margin-top: 15px;
+}
+.foto-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.foto {
+    width: 180px;
+    height: 300px;
+    border-radius: 14px;
+    border: 3px solid #194756;
+    object-fit: cover;
+    background-color: #54736e;
+}
+footer {
+    background-color: #194756;
+    padding: 20px 30px;
+    text-align: center;
+}
+.red {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.pie {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+.pie a {
+    color: #F2EABC;
+    text-decoration: none;
+    font-size: 15px;
+}
