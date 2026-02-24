@@ -42,6 +42,7 @@ const procesarUsuarios = (usuarios) => {
         const {nombre} = usuario;//reestructurar para obtener el nombre
         return nombre.lenght > 5 ? nombre.toUpperCase() : nombre.toLowerCase();
     });
+
 };
 const result2 = procesarUsuarios(usuarios);
 console.log(result2);
