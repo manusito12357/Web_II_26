@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJERCICIO 1 IDENTIFICARME</title>
+</head>
+<body>
+    <div id="idElemento">TEXTO INICIAL</div>
+    <script>
+        const elemento = document.getElementById('idElemento');//para obtener lo que hay en idElemento
+        console.log(elemento.textContent)//el texto que esta obteniendo
+        elemento.textContent = 'nuevo texto'//en aqui cambiamos lo que contiene ese div antes TEXTO INICIAL y ahora nuevo texto
+    </script>
+</body>
+</html>

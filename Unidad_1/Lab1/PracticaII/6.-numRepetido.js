@@ -16,7 +16,7 @@ function masRepetidoTradicional(array) {
     }
     return numeroMasRepetido;
 }
-const numero = [1, 3, 2, 3, 4, 3, 2];
+const numero = [1, 3, 2, 3, 4, 3, 2,2 ,2];
 console.log(" El más repetido es: ", masRepetidoTradicional(numero));
 
 //funcion flecha 
