@@ -8,6 +8,11 @@ import deletIcon from "./components/deletIcon.js";
         evento.preventDefault();
         const input = document.querySelector('[data-form-input]');//este va crear los eventos o las tareas
         const value = input.value;//recupero el valor del input
+        if (value.trim() === "") {
+        alert("No puedes ingresar una tarea vacia") // El aviso
+        input.value = ""; 
+        return; 
+    }
         const list = document.querySelector('[data-list]')
         const task = document.createElement('li')
         task.classList.add('card')//para agregar de la li 
@@ -21,6 +26,10 @@ import deletIcon from "./components/deletIcon.js";
         task.appendChild(contTask);
         task.appendChild(deletIcon());
         list.appendChild(task);
+        const colorChecks = document.getElementsByClassName('far fa-check-square icon')
+        for(const colorCheck of colorChecks){
+            colorCheck.style.backgroundColor = 'blue';
+        }
     }
 //lamar a crear task
 btn.addEventListener('click',createTask);

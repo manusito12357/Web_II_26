@@ -6,8 +6,14 @@ const checkComplete = ()=>{
 }
 const color = (evento) =>{//en esta parte se cambia de color al check
     const element = evento.target;
-    element.classList.add('fas');
-    element.classList.add('completeIcon');
-    element.classList.remove('far')
+    if (element.classList.contains('fas')) {
+        element.classList.remove('fas');
+        element.classList.remove('completeIcon');
+        element.classList.add('far'); 
+    } else {
+        element.classList.add('fas');
+        element.classList.add('completeIcon');
+        element.classList.remove('far');
+    }
 };
 export default checkComplete
