@@ -1,0 +1,90 @@
+.pagina {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    padding: 8rem 1.5rem 3rem;
+    color: aliceblue;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+        url('../img/port1.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+.pagina__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    max-width: 900px;
+    word-wrap: break-word;
+}
+
+.pagina__desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    max-width: 700px;
+    padding: 0 1rem;
+}
+
+.pagina__boton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 220px;
+    width: min(320px, 90%);
+    padding: 1rem 1.2rem;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.pagina__boton:hover {
+    background-color: #ffffff;
+    color: #111111;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+    .pagina {
+        padding-top: 7rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 1.2rem;
+    }
+
+    .pagina__titulo {
+        margin: 0 auto;
+    }
+
+    .pagina__desc {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pagina {
+        padding-top: 6rem;
+        padding-bottom: 2rem;
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+        gap: 1rem;
+    }
+
+    .pagina__boton {
+        min-width: 200px;
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+    }
+}
