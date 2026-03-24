@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:43:02.973Z",
+      "id": "8x40ka3Gg-Q"
+    },
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:43:03.989Z",
+      "id": "Orz1d6jWevQ"
+    },
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:43:04.358Z",
+      "id": "tlKwxVTIhzI"
+    },
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:43:04.523Z",
+      "id": "zKHjwOduwC8"
+    },
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:43:04.797Z",
+      "id": "iIacKSilMFc"
+    },
+    {
+      "titulo": "nuevo post",
+      "descripcion": "es un nuevo post creado",
+      "fecha": "2026-03-23T21:44:43.637Z",
+      "id": "owcsXp6rpO4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
