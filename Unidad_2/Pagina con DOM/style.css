@@ -1,0 +1,60 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+.caos-container {
+    border: 2px solid black;
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 50px;
+}
+
+.titulo-molesto {
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.field {
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+input[type="text"] {
+    width: 90%;
+}
+.tiny-input {
+    width: 30px;
+}
+
+#btn-submit {
+    width: 70px;
+    cursor: pointer;
+    padding: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th{
+    padding: 10px;
+    text-align: left;
+}
+td{
+    padding: 10px;
+    text-align: right;
+}
+.fila-editando {
+    background-color: yellow;
+}
