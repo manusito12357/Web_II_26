@@ -1,6 +1,6 @@
 import { crearAcciones } from '../components/card.js';
 
-const API_URL = 'http://localhost:3001/posts';
+const API_URL = 'http://localhost:3009/posts';
 
 const btnGet = document.querySelector('.btn-get');
 const resultado = document.getElementById('result');
