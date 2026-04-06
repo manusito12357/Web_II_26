@@ -1,0 +1,15 @@
+{
+    "posts":[
+        {
+        "id": "1",
+        "task": "Mi primera tarea",
+        "description": "Prueba de funcionamiento",
+        "date": "2026-04-06",
+        "priority": "Alta",
+        "email": "test@correo.com",
+        "number": "70000000",
+        "time": "08:00",
+        "completed": false
+    }
+    ]
+}
