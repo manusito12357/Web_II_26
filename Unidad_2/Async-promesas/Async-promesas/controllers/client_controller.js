@@ -47,7 +47,7 @@ const crearFila = (nombre, email, id) => {
 const table = document.querySelector('[data-table]');
 clientService.listar_clientes()
     .then((data) => {
-        data.forEach (({nombre, email}) =>{
+        data.forEach (({nombre, email, id}) =>{
             const nuevafila = crearFila(nombre, email, id)
             table.appendChild(nuevafila)
         });

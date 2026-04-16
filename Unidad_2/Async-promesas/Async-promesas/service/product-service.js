@@ -1,3 +1,4 @@
+
 //recepcion de datos
 /*
 const crearFila = (nombre, email) => {
@@ -60,47 +61,47 @@ listar_clientes()
 */
 //-------optimizado--------//
 
-const listar_clientes = () => fetch("http://localhost:3001/perfil")
+const listar_productos = () => fetch("http://localhost:3001/productos")
 .then((respuesta) => respuesta.json());
 
-const crearCliente = (nombre, email) => {
-    return fetch("http://localhost:3001/perfil",{ 
+const crearProducto = (nombre, precio) => {
+    return fetch("http://localhost:3001/productos",{ 
         method: "POST",
         headers:{
             "Content-type":"application/json"
         },
-        body:JSON.stringify({nombre, email, id:uuid.v4()})
+        body:JSON.stringify({nombre, precio, id:uuid.v4()})
     });    
 };
 
-const actualizarCliente = (nombre, email, id) => {// Solo aqui el nombre y email menos id
-    return fetch(`http://localhost:3001/perfil/${id}`, {
+const actualizarProducto = (nombre, precio, id) => {// Solo aqui el nombre y email menos id
+    return fetch(`http://localhost:3001/productos/${id}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify({ nombre, email })
+        body: JSON.stringify({ nombre, precio})
     })
     .then(respuesta => console.log(respuesta)) 
     .catch((error) => console.log(error));
 };
 
-const eliminarCliente = (id) => {
+const eliminarProducto = (id) => {
     console.log("eliminar");
-    return fetch(`http://localhost:3001/perfil/${id}`,{
+    return fetch(`http://localhost:3001/productos/${id}`,{
         method: "DELETE"
     })
     .then(respuesta => console.log(respuesta)) 
     .catch((error) => console.log(error));
 };
-const cliente = (id) => {
-    return fetch(`http://localhost:3001/perfil/${id}`)
+const producto = (id) => {
+    return fetch(`http://localhost:3001/productos/${id}`)
     .then((respuesta) =>respuesta.json());
 }
-export const clientService = {
-    listar_clientes,
-    crearCliente,
-    eliminarCliente,
-    actualizarCliente,
-    cliente
+export const productService = {
+    listar_productos,
+    crearProducto,
+    eliminarProducto,
+    actualizarProducto,
+    producto
 };
