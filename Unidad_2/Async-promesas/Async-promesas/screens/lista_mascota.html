@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doguito Petshop | Productos</title>
+    <title>Doguito Petshop | Mascotas</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+        rel="stylesheet"
+    />
     <link rel="icon" href="../assets/img/doguitoadm.svg" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base/base.css" />
     <link rel="stylesheet" href="../assets/css/componentes/header.css" />
-    <link rel="stylesheet" href="../assets/css/lista_cliente.css" /> <link rel="stylesheet" href="../assets/css/componentes/table.css" />
+    <link rel="stylesheet" href="../assets/css/lista_cliente.css" />
+    <link rel="stylesheet" href="../assets/css/componentes/table.css" />
     <link rel="stylesheet" href="../assets/css/componentes/button.css" />
+
     <style>
         .table__column--g {
             width: auto !important;
@@ -27,7 +35,7 @@
                 <li class="header__link"><a href="#">Dashboard</a></li>
                 <li class="header__link"><a href="lista_producto.html">Productos</a></li>
                 <li class="header__link"><a href="lista_cliente.html">Clientes</a></li>
-                <li class="header__link"><a href="#">Pets</a></li>
+                <li class="header__link"><a href="lista_mascota.html">Pets</a></li>
             </ul>
         </nav>
     </header>
@@ -36,19 +44,21 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="table__column--p">Producto</th>
-                    <th class="table__column--g">Precio</th>
-                    <th class="table__column--g">Descripcion</th>
-                    <th class="table__column--m table__align--right">
-                        <a href="./registrar_producto.html" class="simple-button simple-button--add">Nuevo Producto</a>
+                    <th class="table__column--p">Nombre</th>
+                    <th class="table__column--g">Edad</th>
+                    <th class="table__column--p">Raza</th>
+                    <th class="table__column--p">Peso</th>
+                    <th class="table__column--p">ID Dueño</th>
+                    <th class="table__column--p table__align--right">
+                        <a href="./registrar_mascota.html" class="simple-button simple-button--add">Nueva Mascota</a>
                     </th>
                 </tr>
             </thead>
             <tbody data-table>
-                </tbody>
+            </tbody>
         </table>
     </main>
 
-    <script type="module" src="../controllers/product_controller.js"></script>
+    <script type="module" src="../controllers/mascota_controller.js"></script>
 </body>
 </html>
