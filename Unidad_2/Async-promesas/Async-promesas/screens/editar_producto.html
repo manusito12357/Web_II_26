@@ -1,0 +1,52 @@
+<main class="container flex flex--center flex--column">
+  <section class="card cadastro">
+    <h1 class="card__title">Editar Producto</h1>
+    <form action="#" class="flex flex--column" data-form>
+      
+      <div class="input-container">
+        <input
+          name="nombre"
+          id="nombre"
+          class="input"
+          type="text"
+          placeholder="Nombre del producto"
+          required
+          data-nombre
+        />
+        <label class="input-label" for="nombre">Nombre</label>
+        <span class="input-menssage-error">Este campo es requerido</span>
+      </div>
+
+      <div class="input-container">
+        <input
+          name="precio"
+          id="precio"
+          class="input"
+          type="text" 
+          placeholder="Precio"
+          required
+          data-precio
+        />
+        <label class="input-label" for="precio">Precio</label>
+        <span class="input-menssage-error">Este campo es requerido</span>
+      </div>
+
+      <div class="input-container">
+        <input
+          name="descripcion"
+          id="descripcion"
+          class="input"
+          type="text"
+          placeholder="Descripción"
+          required
+          data-descripcion
+        />
+        <label class="input-label" for="descripcion">Descripción</label>
+        <span class="input-menssage-error">Este campo es requerido</span>
+      </div>
+
+      <button type="submit" class="button">Editar producto</button>
+    </form>
+  </section>
+  <script type="module" src="../controllers/productActua_controller.js"></script>
+</main>

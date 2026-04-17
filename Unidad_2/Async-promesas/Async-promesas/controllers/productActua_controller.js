@@ -1,4 +1,4 @@
-import { productService } from "../service/product-service";
+import { productService } from "../service/product-service.js";
 const formulario = document.querySelector("[data-form]");
 const obInfo = async () =>{
     const url = new URL(window.location);
@@ -8,11 +8,13 @@ const obInfo = async () =>{
     }
     const nombre = document.querySelector("[data-nombre]");
     const precio = document.querySelector("[data-precio]");
+    const descripcion = document.querySelector("[data-descripcion]")
     try{
         const perfil = await productService.producto(id);
-        if(perfil.nombre && perfil.precio){
+        if(perfil.nombre && perfil.precio && perfil.descripcion){
             nombre.value = perfil.nombre;
-            precio.value = perfil.precio;//rescato los datos del json y los pego al formulario
+            precio.value = perfil.precio;
+            descripcion.value = perfil.descripcion;//rescato los datos del json y los pego al formulario
         }else{
             throw new Error();
         }
@@ -26,9 +28,10 @@ formulario.addEventListener("submit", (evento) =>{
     evento.preventDefault();
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
-    const nombre = document.querySelector("[data-form]").value;
-    const precio = document.querySelector("[data-form]").value;
-    productService.actualizarProducto(nombre, email, id).then(() =>{
+    const nombre = document.querySelector("[data-nombre]").value;
+    const precio = document.querySelector("[data-precio]").value;
+    const descripcion = document.querySelector("[data-descripcion]").value;
+    productService.actualizarProducto(nombre, precio, descripcion, id).then(() =>{
         window.location.href = "/screens/edicion_concluida.html"
     })
 })

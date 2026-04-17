@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../assets/css/register_client.css" />
     <link rel="stylesheet" href="../assets/css/componentes/inputs.css" />
     <link rel="stylesheet" href="../assets/css/componentes/button.css" />
-    <link rel="stylesheet" href="./assets/css/register_product.css" />
+    <link rel="stylesheet" href="../assets/css/register_product.css" />
   </head>
   <body>
     <header class="header container">
@@ -78,14 +78,16 @@
               name="description"
               id="description"
               placeholder="Descripcion"
+              data-descripcion
             ></textarea>
             <label class="textarea-label" for="description">Descripcion</label>
             <span class="textarea-menssage-error">Error</span>
           </div>
-          <a href="../registro_completado.html" class="button"
-            >Registrar producto</a>
+          <button type="submit" class="button">Registrar producto</button>
         </form>
       </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="../controllers/productRegis_controller.js"></script>
   </body>
 </html>

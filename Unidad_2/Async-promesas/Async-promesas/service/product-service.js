@@ -64,23 +64,23 @@ listar_clientes()
 const listar_productos = () => fetch("http://localhost:3001/productos")
 .then((respuesta) => respuesta.json());
 
-const crearProducto = (nombre, precio) => {
+const crearProducto = (nombre, precio, descripcion) => {
     return fetch("http://localhost:3001/productos",{ 
         method: "POST",
         headers:{
             "Content-type":"application/json"
         },
-        body:JSON.stringify({nombre, precio, id:uuid.v4()})
+        body:JSON.stringify({nombre, precio, descripcion, id:uuid.v4()})
     });    
 };
 
-const actualizarProducto = (nombre, precio, id) => {// Solo aqui el nombre y email menos id
+const actualizarProducto = (nombre, precio, descripcion,id) => {// Solo aqui el nombre y email menos id
     return fetch(`http://localhost:3001/productos/${id}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify({ nombre, precio})
+        body: JSON.stringify({ nombre, precio, descripcion})
     })
     .then(respuesta => console.log(respuesta)) 
     .catch((error) => console.log(error));
