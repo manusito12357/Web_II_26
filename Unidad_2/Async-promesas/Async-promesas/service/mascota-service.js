@@ -63,7 +63,7 @@ listar_mascotas()
 */
 
 //-------optimizado--------//
-
+/*
 const listar_mascotas = () => fetch("http://localhost:3001/mascotas")
     .then((respuesta) => respuesta.json());
 
@@ -109,4 +109,124 @@ export const mascotaService = {
     eliminarMascota,
     actualizarMascota,
     mascota
+};
+*/
+/*
+const URL_SUPABASE = 'https://cofqrhpulspgpayihwwb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ZuznyM9dXtZL6Qbln0bgLg_WokHaTsb';
+const table = 'mascotas';
+const API_URL = `${URL_SUPABASE}/rest/v1/${table}`;
+
+const HEADERS = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+};
+
+const request = async (url, option = {}) => {
+    const res = await fetch(url, { headers: HEADERS, ...option });
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : null;
+
+    if (!res.ok) {
+        const mensaje = data?.mensaje ?? data?.error ?? text ?? 'Error';
+        throw new Error(mensaje);
+    }
+    return data;
+};
+
+// GET - listar todas las mascotas
+const listar_mascotas = () => {
+    return request(`${API_URL}?select=id,nombre,edad,raza,peso,id_dueno`);
+};
+
+// GET - obtener mascota por id
+const mascota = (id) => {
+    return request(`${API_URL}?id=eq.${id}&select=id,nombre,edad,raza,peso,id_dueno`)
+        .then(data => data?.[0]);
+};
+
+// POST - crear mascota
+const crearMascota = (nombre, edad, raza, peso, id_dueno) => {
+    return request(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({ nombre, edad, raza, peso, id_dueno })
+    }).then(data => data?.[0]);
+};
+
+// PATCH - actualizar mascota
+const actualizarMascota = (id, nombre, edad, raza, peso, id_dueno) => {
+    return request(`${API_URL}?id=eq.${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ nombre, edad, raza, peso, id_dueno })
+    }).then(data => data?.[0] ?? Promise.reject(new Error('No se pudo actualizar la mascota')));
+};
+
+// DELETE - eliminar mascota
+const eliminarMascota = (id) => {
+    return request(`${API_URL}?id=eq.${id}`, {
+        method: 'DELETE',
+        headers: { ...HEADERS, 'Prefer': 'return=minimal' }
+    }).then(() => true)
+      .catch(() => Promise.reject(new Error('No se pudo eliminar la mascota')));
+};
+
+export const mascotaService = {
+    listar_mascotas,
+    mascota,
+    crearMascota,
+    actualizarMascota,
+    eliminarMascota
+};*/
+
+//------CON MYSQL---------------
+const API_BASE_URL = "http://127.0.0.1/API/mascotas.php";
+
+const listar_mascotas = () => {
+    return fetch(API_BASE_URL).then(response => {
+        if (!response.ok) throw new Error('error mascotas');
+        return response.json();
+    });
+};
+
+const mascota = (id) => {
+    return fetch(`${API_BASE_URL}?Id=${id}`).then(response => {
+        if (!response.ok) throw new Error('error mascota');
+        return response.json();
+    });
+};
+
+const crearMascota = (nombre, edad, raza, peso, id_dueno) => {
+    return fetch(API_BASE_URL, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ nombre, edad, raza, peso, id_dueno })
+    }).then(response => {
+        if (!response.ok) throw new Error('error al crear');
+        return response.json();
+    });
+};
+
+const actualizarMascota = (id, nombre, edad, raza, peso, id_dueno) => {
+    return fetch(API_BASE_URL, {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ Id: id, nombre, edad, raza, peso, id_dueno })
+    }).then(response => response.json())
+        .catch(err => console.log(err));
+};
+
+const eliminarMascota = (id) => {
+    return fetch(`${API_BASE_URL}?Id=${id}`, {
+        method: "DELETE"
+    });
+};
+
+export const mascotaService = {
+    listar_mascotas,
+    mascota,
+    crearMascota,
+    actualizarMascota,
+    eliminarMascota
 };

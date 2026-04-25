@@ -19,7 +19,7 @@ const obInfo = async () =>{
             throw new Error();
         }
     }catch(error){
-        window.location.href = "/screens/error.html"
+        window.location.href = "../screens/error.html"
     }
 };
 obInfo();
@@ -31,7 +31,7 @@ formulario.addEventListener("submit", (evento) =>{
     const nombre = document.querySelector("[data-nombre]").value;
     const precio = document.querySelector("[data-precio]").value;
     const descripcion = document.querySelector("[data-descripcion]").value;
-    productService.actualizarProducto(nombre, precio, descripcion, id).then(() =>{
-        window.location.href = "/screens/edicion_concluida.html"
+    productService.actualizarProducto(id, nombre, precio, descripcion).then(() =>{
+        window.location.href = "../screens/edicion_concluida.html"
     })
 })

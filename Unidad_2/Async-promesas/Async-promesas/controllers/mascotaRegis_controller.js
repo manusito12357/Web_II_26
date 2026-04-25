@@ -17,13 +17,13 @@ clientService.listar_clientes()
 
 formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
-    const nombre  = document.querySelector("[data-nombre]").value;
-    const edad    = document.querySelector("[data-edad]").value;
-    const raza    = document.querySelector("[data-raza]").value;
-    const peso    = document.querySelector("[data-peso]").value;
-    const idDueno = document.querySelector("[data-iddueno]").value;
+    const nombre   = document.querySelector("[data-nombre]").value;
+    const edad     = document.querySelector("[data-edad]").value;
+    const raza     = document.querySelector("[data-raza]").value;
+    const peso     = document.querySelector("[data-peso]").value;
+    const id_dueno = document.querySelector("[data-iddueno]").value;
 
-    mascotaService.crearMascota(nombre, edad, raza, peso, idDueno)
+    mascotaService.crearMascota(nombre, edad, raza, peso, id_dueno)
         .then((respuesta) => {
             console.log("Todo bien", respuesta);
             window.location.href = "../screens/registro_completado.html";

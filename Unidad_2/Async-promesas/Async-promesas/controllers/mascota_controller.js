@@ -14,7 +14,7 @@ const crearFila = (nombre, edad, raza, peso, idDueno, id) => {
         <ul class="table__button-control">
         <li>
             <a
-            href="../screens/editar_mascota.html"
+            href="../screens/editar_mascota.html?id=${id}"
             class="simple-button simple-button--edit"
             >
             Editar
