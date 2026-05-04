@@ -100,7 +100,7 @@ const cliente = (id) => {
 
 
 // ESTO ES CON MYSQL
-const API_BASE_URL = "http://127.0.0.1/API/conexion.php";
+const API_BASE_URL = "http://127.0.0.1/API/api.php";
 
 const listar_clientes = () => {
     return fetch(API_BASE_URL).then(response => {
@@ -117,10 +117,11 @@ const cliente = (id) => {
 };
 
 const crearCliente = (nombre, email) => {
+    const id = uuid.v4(); // genera el UUID
     return fetch(API_BASE_URL, {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ nombre, email })
+        body: JSON.stringify({ Id: id, nombre, email })
     }).then(response => {
         if (!response.ok) throw new Error('error al crear');
         return response.json();

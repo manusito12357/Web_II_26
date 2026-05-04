@@ -1,7 +1,7 @@
 <?php 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -9,92 +9,101 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$dbname = "doguito_petshopii";
+// ——— CONEXIÓN SQL SERVER ———
+$serverName = "localhost"; // o ".\SQLEXPRESS" si usas Express
+$connectionInfo = [
+    "Database"               => "doguito_petshopii",
+    "UID"                    => "sa",          // tu usuario
+    "PWD"                    => "tu_password", // tu contraseña
+    "CharacterSet"           => "UTF-8",
+    "TrustServerCertificate" => true
+];
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-if($conn->connect_error){
+if (!$conn) {
     http_response_code(500);
-    die(json_encode(["error" => "Conexión fallida"]));
+    die(json_encode(["error" => sqlsrv_errors()]));
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-switch($method){
-    case 'GET': 
-        $id = $_GET['Id'] ?? null; 
-        if($id){
-            $stmt = $conn->prepare("SELECT * FROM cliente WHERE Id = ?");
-            $stmt->bind_param("i", $id); 
-            $stmt->execute();
-            $result = $stmt->get_result();
-            echo json_encode($result->fetch_assoc() ?: ["message" => "No existe"]);
+switch ($method) {
+
+    case 'GET':
+        $id = $_GET['Id'] ?? null;
+
+        if ($id) {
+            $stmt = sqlsrv_query($conn, "SELECT * FROM cliente WHERE Id = ?", [$id]);
+            $row  = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+            echo json_encode($row ?: ["message" => "No existe"]);
         } else {
-            $result = $conn->query("SELECT * FROM cliente");
-            $clientes = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt     = sqlsrv_query($conn, "SELECT * FROM cliente");
+            $clientes = [];
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                $clientes[] = $row;
+            }
             echo json_encode($clientes);
         }
         break;
 
-    case 'POST': 
-        $input = json_decode(file_get_contents('php://input'), true);
+    case 'POST':
+        $input  = json_decode(file_get_contents('php://input'), true);
         $nombre = $input['nombre'] ?? '';
-        $email = $input['email'] ?? '';
-        
-        // IMPORTANTE: Si es autoincrementable, NO pongas el Id en el INSERT
-        $stmt = $conn->prepare("INSERT INTO cliente (nombre, email) VALUES (?, ?)");
-        $stmt->bind_param("ss", $nombre, $email);
-        
-        if($stmt->execute()){
+        $email  = $input['email']  ?? '';
+
+        $sql  = "INSERT INTO cliente (nombre, email) OUTPUT INSERTED.Id VALUES (?, ?)";
+        $stmt = sqlsrv_query($conn, $sql, [$nombre, $email]);
+
+        if ($stmt) {
+            $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
             http_response_code(201);
             echo json_encode([
-                "message" => "creado exitosamente", 
-                "Id" => $conn->insert_id // Esto te devuelve el Id que generó la BD
+                "message" => "Creado exitosamente",
+                "Id"      => $row['Id']
             ]);
         } else {
             http_response_code(500);
-            echo json_encode(["error" => "Error al insertar"]);
+            echo json_encode(["error" => sqlsrv_errors()]);
         }
         break;
 
-    case 'PUT': 
-        $input = json_decode(file_get_contents('php://input'), true);
-        // Asegúrate que el JSON que envías tenga "Id" (mayúscula)
-        $id = $input['Id'] ?? null; 
+    case 'PUT':
+        $input  = json_decode(file_get_contents('php://input'), true);
+        $id     = $input['Id']     ?? null;
         $nombre = $input['nombre'] ?? '';
-        $email = $input['email'] ?? '';
+        $email  = $input['email']  ?? '';
 
-        if($id) {
-            $stmt = $conn->prepare("UPDATE cliente SET nombre = ?, email = ? WHERE Id = ?");
-            $stmt->bind_param("ssi", $nombre, $email, $id);
-            
-            if($stmt->execute()){
-                echo json_encode(["message" => "actualizado exitosamente"]);
+        if ($id) {
+            $sql  = "UPDATE cliente SET nombre = ?, email = ? WHERE Id = ?";
+            $stmt = sqlsrv_query($conn, $sql, [$nombre, $email, $id]);
+
+            if ($stmt) {
+                echo json_encode(["message" => "Actualizado exitosamente"]);
             } else {
                 http_response_code(500);
-                echo json_encode(["error" => "error al actualizar"]);
+                echo json_encode(["error" => sqlsrv_errors()]);
             }
         } else {
+            http_response_code(400);
             echo json_encode(["error" => "Falta el Id"]);
         }
         break;
 
-    case 'DELETE': 
+    case 'DELETE':
         $id = $_GET['Id'] ?? null;
-        if($id) {
-            $stmt = $conn->prepare("DELETE FROM cliente WHERE Id = ?");
-            $stmt->bind_param("i", $id);
-            
-            if($stmt->execute()){
+
+        if ($id) {
+            $stmt = sqlsrv_query($conn, "DELETE FROM cliente WHERE Id = ?", [$id]);
+
+            if ($stmt) {
                 echo json_encode(["message" => "Eliminado exitosamente", "Id" => $id]);
             } else {
                 http_response_code(500);
-                echo json_encode(["error" => "error al eliminar"]);
+                echo json_encode(["error" => sqlsrv_errors()]);
             }
         } else {
+            http_response_code(400);
             echo json_encode(["error" => "Falta el Id"]);
         }
         break;
@@ -104,5 +113,5 @@ switch($method){
         echo json_encode(["error" => "Método no permitido"]);
 }
 
-$conn->close();
+sqlsrv_close($conn);
 ?>
