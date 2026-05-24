@@ -1,0 +1,36 @@
+{
+  "perfil": [
+    {
+      "nombre": "dadas",
+      "email": "asdadsads@gmail.com",
+      "id": "E6A6hXutnUU"
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "adsdad",
+      "precio": "adsdaads",
+      "descripcion": "da",
+      "id": "nGTHe0yjoCY"
+    }
+  ],
+  "mascotas": [
+    {
+      "nombre": "Peluchin",
+      "edad": "2",
+      "raza": "chapa",
+      "peso": "10kilos",
+      "idDueno": "E6A6hXutnUU",
+      "id": "Bask625cTCU"
+    },
+    {
+      "nombre": "as",
+      "edad": "a",
+      "raza": "s",
+      "peso": "as",
+      "idDueno": "E6A6hXutnUU",
+      "id": "p9iH3ysI1J4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

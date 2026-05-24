@@ -1,17 +1,20 @@
-import { clientService } from "../service/client-service.js";
-const crearFila = (nombre, email, id) => {
-    const fila = document.createElement('tr');//con esto creamos nua fila
-    //html como variable
+import { mascotaService } from "../service/mascota-service.js";
+
+const crearFila = (nombre, edad, raza, peso, idDueno, id) => {
+    const fila = document.createElement('tr');
     const contenido = `
     <td class="td" data-td>
         ${nombre}
     </td>
-    <td>${email}</td>
+    <td>${edad}</td>
+    <td>${raza}</td>
+    <td>${peso}</td>
+    <td>${idDueno}</td>
     <td>
         <ul class="table__button-control">
         <li>
             <a
-            href="../screens/editar_cliente.html?id=${id}"
+            href="../screens/editar_mascota.html?id=${id}"
             class="simple-button simple-button--edit"
             >
             Editar
@@ -24,31 +27,30 @@ const crearFila = (nombre, email, id) => {
         </li>
         </ul>
     </td>
-    `
-;
+    `;
     fila.innerHTML = contenido;
     const btn = fila.querySelector("button");
 
     btn.addEventListener("click", () => {
-        const id = btn.id; 
-        clientService.eliminarCliente(id)
-            .then((respuesta) => {
+        const id = btn.id;
+        mascotaService.eliminarMascota(id)
+            .then(() => {
                 alert("Eliminado");
-                window.location.reload(); 
+                window.location.reload();
             })
-            .catch((error) => {
+            .catch(() => {
                 alert("error");
             });
-    }); // Aquí se cierra el addEventListener
+    });
 
     return fila;
-}
+};
 
 const table = document.querySelector('[data-table]');
-clientService.listar_clientes()
+mascotaService.listar_mascotas()
     .then((data) => {
-        data.forEach (({nombre, email, Id}) =>{
-            const nuevafila = crearFila(nombre, email, Id)
-            table.appendChild(nuevafila)
+        data.forEach(({ nombre, edad, raza, peso, idDueno, id }) => {
+            const nuevaFila = crearFila(nombre, edad, raza, peso, idDueno, id);
+            table.appendChild(nuevaFila);
         });
-    }).catch((error) => alert("error"))
+    }).catch(() => alert("error"));

@@ -1,17 +1,18 @@
-import { clientService } from "../service/client-service.js";
-const crearFila = (nombre, email, id) => {
+import { productService } from "../service/product-service.js";
+const crearFila = (nombre, precio, descripcion, id) => {
     const fila = document.createElement('tr');//con esto creamos nua fila
     //html como variable
     const contenido = `
     <td class="td" data-td>
         ${nombre}
     </td>
-    <td>${email}</td>
+    <td>${precio}</td>
+    <td>${descripcion}</td>
     <td>
         <ul class="table__button-control">
         <li>
             <a
-            href="../screens/editar_cliente.html?id=${id}"
+            href="../screens/editar_producto.html?id=${id}"
             class="simple-button simple-button--edit"
             >
             Editar
@@ -31,7 +32,7 @@ const crearFila = (nombre, email, id) => {
 
     btn.addEventListener("click", () => {
         const id = btn.id; 
-        clientService.eliminarCliente(id)
+        productService.eliminarProducto(id)
             .then((respuesta) => {
                 alert("Eliminado");
                 window.location.reload(); 
@@ -45,10 +46,10 @@ const crearFila = (nombre, email, id) => {
 }
 
 const table = document.querySelector('[data-table]');
-clientService.listar_clientes()
+productService.listar_productos()
     .then((data) => {
-        data.forEach (({nombre, email, Id}) =>{
-            const nuevafila = crearFila(nombre, email, Id)
+        data.forEach (({nombre, precio, descripcion, id}) =>{
+            const nuevafila = crearFila(nombre, precio, descripcion, id)
             table.appendChild(nuevafila)
         });
     }).catch((error) => alert("error"))

@@ -1,4 +1,4 @@
-import mysql from "msql2/promise"//funciona como puente
+import mysql from "mysql2/promise"//funciona como puente
 import dotenv from "dotenv"//este nos ayuda para poder usar las variables que creamos en el archivo .env
 dotenv.config();
 
